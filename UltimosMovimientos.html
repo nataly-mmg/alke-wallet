@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transacciones</title>
+
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background-color: #ecdde8;
+        }
+
+        .login-box {
+            border-radius: 24px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light px-4">
+        <span class="navbar-brand fw-bold">Menú</span>
+
+        <div class="ms-auto">
+            <span class="me-3">Saldo:</span>
+            <strong id="saldoNav">$60000</strong>
+        </div>
+    </nav>
+
+    <!-- CONTENEDOR PRINCIPAL -->
+    <div class="container py-4 login-box">
+
+
+        <div class="row mx-auto">
+            <div class="col">
+                <h2 class="text-center">Últimos Movimientos</h2>
+            </div>
+        </div>
+
+
+        <!-- FILTRO POR TIPO DE MOVIMIENTO -->
+        <div class="p-5 bg-body-tertiary mx-auto login-box mb-3"
+            style="max-width: 600px; width: 100%; border-radius: 24px;">
+            <label for="filtroMovimientos" class="form-label mb-2">Filtrar por tipo de movimiento:</label>
+            <select id="filtroMovimientos" class="form-select mb-4">
+                <option value="todos" selected>Todos</option>
+                <option value="deposito">Depósito</option>
+                <option value="transferencia_recibida">Transferencia recibida</option>
+                <option value="compra">Compra</option>
+            </select>
+
+
+
+            <div class="row mx-auto">
+                <div class="col">
+                    <h4 class="text-center p-1 ">Lista de Transacciones</h4>
+                </div>
+            </div>
+
+
+            <!-- LISTA MOVIMIENTOS -->
+            <div class="p-4 bg-body-tertiary mx-auto login-box"
+                style="max-width: 600px; width: 100%; border-radius: 24px;">
+                <ul class="list-group" id="listaMovimientos">
+                </ul>
+            </div>
+
+
+
+        </div>
+
+
+
+        <!-- BOTONES (DEPOSITAR / TRANSFERIR) -->
+        <div class="row g-2 mt-3 justify-content-center">
+            <div class="col-12 col-sm-3 d-grid">
+                <button type="button" class="btn btn-primary" id="btnAbrirDeposito">
+                    Depósito
+                </button>
+            </div>
+            <div class="col-12 col-sm-3 d-grid">
+                <button type="button" class="btn btn-primary" id="btnAbrirTransferencia">
+                    Transferencia recibida
+                </button>
+            </div>
+            <div class="col-12 col-sm-3 d-grid">
+                <button type="button" class="btn btn-primary" id="btnAbrirCompra">
+                    Compra
+                </button>
+            </div>
+        </div>
+
+
+
+        <!-- MENSAJE EN PANTALLA  -->
+        <div id="mensajeOk" class="alert alert-success mt-3 d-none" role="alert"></div>
+        <div id="mensajeError" class="alert alert-danger mt-3 d-none" role="alert"></div>
+
+    </div>
+
+
+
+
+    <!-- VOLVER AL MENÚ -->
+    <div class="text-center p-4">
+        <a href="menu.html" class="btn btn-secondary">Ir al Menú Principal</a>
+    </div>
+
+    </div>
+
+    <!-- MODAL DE DEPÓSITO -->
+    <div class="modal fade" id="modalDeposito" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h5 class="modal-title">Realizar depósito</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+
+                <div class="modal-body">
+                    <label class="form-label">Ingrese monto</label>
+                    <input type="number" class="form-control" id="montoDeposito" min="1" placeholder="Ej: 10000">
+                    <div id="errorDeposito" class="text-danger mt-2"></div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" id="btnConfirmarDeposito">Aceptar</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL DE TRANSFERENCIA -->
+    <div class="modal fade" id="modalTransferencia" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h5 class="modal-title">Enviar dinero</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+
+                <div class="modal-body">
+                    <label class="form-label">Destinatario</label>
+                    <input type="text" class="form-control" id="destinoTransferencia" placeholder="Ej: Cris">
+
+                    <label class="form-label mt-3">Ingrese monto</label>
+                    <input type="number" class="form-control" id="montoTransferencia" min="1" placeholder="Ej: 15000">
+
+                    <div id="errorTransferencia" class="text-danger mt-2"></div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" id="btnConfirmarTransferencia">Aceptar</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+<!-- MODAL DE COMPRA -->
+<div class="modal fade" id="modalCompra" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title">Registrar compra</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+            </div>
+
+            <div class="modal-body">
+                <label class="form-label">Descripción</label>
+                <input type="text" class="form-control" id="detalleCompra" placeholder="Ej: Supermercado">
+
+                <label class="form-label mt-3">Ingrese monto</label>
+                <input type="number" class="form-control" id="montoCompra" min="1" placeholder="Ej: 12000">
+
+                <div id="errorCompra" class="text-danger mt-2"></div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" id="btnConfirmarCompra">Aceptar</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="UltimosMovimientos.js"></script>
+
+
+
+</body>
+
+</html>
