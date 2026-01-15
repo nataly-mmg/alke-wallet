@@ -22,7 +22,14 @@
           transform: translateY(-90px);
       }
 
+/* Ícono superior */
 
+        .wallet-icon {
+            font-size: 42px;
+            color: #1f3d7a;
+            margin-bottom: 16px;
+        } 
+ 
       h1 {
           font-weight: 700;
           color: #0d1b2a;
@@ -50,3 +57,15 @@
       .btn-login:hover {
           background-color: #162d5e;
       }
+
+    
+/* Texto inferior fijo */
+
+        .footer-text {
+            position: absolute;
+            bottom: 28px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 14px;
+            color: #6c757d;
+        } 
