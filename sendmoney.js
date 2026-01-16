@@ -39,7 +39,7 @@ $(function () {
 
         $(this)
             .toggleClass("btn-primary btn-secondary")
-            .text(abierta ? "Ocultar agenda" : "Buscar en la agenda de contactos");
+            .text(abierta ? "Ocultar agenda" : "Buscar contactos");
 
         // Reset visual
         $("#buscarcontacto").val("");
@@ -52,11 +52,87 @@ $(function () {
         }
     });
 
+    // AUTOCOMPLETADO REAL (datalist) SIN CAMBIAR EL HTML
+    const $inputBuscar = $("#buscarcontacto");
+
+    // crear datalist una sola vez
+    if ($("#contactosDatalist").length === 0) {
+        $("body").append('<datalist id="contactosDatalist"></datalist>');
+        $inputBuscar.attr("list", "contactosDatalist"); // conecta input con datalist
+    }
+
+    // función que arma las sugerencias según lo que hay en la lista
+    function actualizarDatalist() {
+        const $dl = $("#contactosDatalist");
+        $dl.empty();
+
+        $("#ListaContactos li").each(function () {
+            const nombre = $(this).find(".contact-name").text().trim();
+            const alias = ($(this).data("alias") || "").toString().trim();
+
+            // sugerencia por nombre
+            if (nombre) $dl.append(`<option value="${nombre}"></option>`);
+
+            // sugerencia por alias
+            if (alias) $dl.append(`<option value="${alias}"></option>`);
+        });
+    }
+
+    // cargar sugerencias al iniciar
+    actualizarDatalist();
+
+
+    // AUTOCOMPLETAR / FILTRAR CONTACTOS (nombre o alias)
+    function normalizarTexto(txt) {
+        return (txt || "")
+            .toString()
+            .toLowerCase()
+            .normalize("NFD")
+            .replace(/[\u0300-\u036f]/g, "")  // elimina acentos (Muñoz -> Munoz)
+            .trim();
+    }
+
+    $("#buscarcontacto").on("input", function () {
+
+        // Si la agenda está oculta, no filtrar (evita comportamientos raros)
+        if ($("#agendaContainer").hasClass("d-none")) return;
+
+        const termino = normalizarTexto($(this).val());
+        let hayCoincidencias = false;
+
+        $("#ListaContactos li").each(function () {
+            const nombre = normalizarTexto($(this).find(".contact-name").text());
+            const alias = normalizarTexto($(this).data("alias"));
+
+            const coincide = (termino === "") || nombre.includes(termino) || alias.includes(termino);
+
+            $(this).toggle(coincide);
+
+            if (coincide && termino !== "") hayCoincidencias = true;
+        });
+
+        // Si el input está vacío: ocultar mensaje y mostrar todo
+        if (termino === "") {
+            $("#msgNoExiste").addClass("d-none");
+            $("#ListaContactos li").show();
+            return;
+        }
+
+        // Si no hay coincidencias: mostrar mensaje
+        if (!hayCoincidencias) {
+            $("#msgNoExiste").removeClass("d-none");
+            $("#btnEnviarDinero").addClass("d-none");
+        } else {
+            $("#msgNoExiste").addClass("d-none");
+        }
+    });
+
 
     // ABRIR MODAL AGREGAR CONTACTO
 
     $("#btnNuevoContacto").on("click", function () {
         $("#alert-container").html("");
+        $("#alert-contacto").html("");
         modalContacto.show();
     });
 
@@ -73,13 +149,13 @@ $(function () {
     }
 
     function mostrarAlertaContacto(mensaje, tipo) {
-    $("#alert-contacto").html(`
+        $("#alert-contacto").html(`
       <div class="alert alert-${tipo} alert-dismissible fade show" role="alert">
         ${mensaje}
         <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
       </div>
     `);
-}
+    }
 
     // VALIDACIÓN CBU
 
@@ -114,6 +190,8 @@ $(function () {
         </div>
       </li>
     `);
+        actualizarDatalist(); // <--  refresca el autocompletado con el nuevo contacto
+
 
         // LIMPIAR CAMPOS
         $("#contactoNombre").val("");
@@ -121,49 +199,11 @@ $(function () {
         $("#contactoAlias").val("");
         $("#contactoBanco").val("");
 
-        mostrarAlerta("Contacto agregado correctamente.", "success");
+        mostrarAlertaContacto("Contacto agregado correctamente.", "success");
         modalContacto.hide();
 
-
-
-
-        
     });
 
-
-    // BUSCAR EN AGENDA (NOMBRE O ALIAS)
-
-    $("#buscarcontacto").on("input", function () {
-
-        const termino = $(this).val().toLowerCase().trim();
-
-        let hayCoincidencias = false;
-
-        $("#ListaContactos li").each(function () {
-            const nombre = $(this).find(".contact-name").text().toLowerCase();
-            const alias = ($(this).data("alias") || "").toLowerCase();
-
-            const coincide = nombre.includes(termino) || alias.includes(termino);
-
-            $(this).toggle(coincide);
-
-            if (coincide) hayCoincidencias = true;
-        });
-
-        // Si el campo está vacío, no mostrar mensaje
-        if (termino === "") {
-            $("#msgNoExiste").addClass("d-none");
-            return;
-        }
-
-        // Mostrar / ocultar mensaje según coincidencias
-        if (!hayCoincidencias) {
-            $("#msgNoExiste").removeClass("d-none");
-            $("#btnEnviarDinero").addClass("d-none"); // opcional: esconder enviar si no hay resultados
-        } else {
-            $("#msgNoExiste").addClass("d-none");
-        }
-    });
 
 
     // SELECCIONAR CONTACTO
