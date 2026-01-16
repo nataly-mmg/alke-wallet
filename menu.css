@@ -1,0 +1,71 @@
+        body {
+            background-color: #f4f6f9;
+            min-height: 100vh;
+        }
+
+        .wallet-card {
+            background: #ffffff;
+            border-radius: 24px;
+            padding: 40px;
+            max-width: 600px;
+            width: 100%;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        .wallet-icon {
+            font-size: 40px;
+            color: #1f3d7a;
+            text-align: center;
+            margin-bottom: 12px;
+        }
+
+        .wallet-title {
+            font-weight: 600;
+            color: #0d1b2a;
+            text-align: center;
+            margin-bottom: 22px;
+        }
+
+        .saldo-card {
+            border-radius: 18px;
+            background: #f8fafc;
+            border: 1px solid #eef1f5;
+            padding: 18px;
+            text-align: center;
+            margin-bottom: 18px;
+        }
+
+        .saldo-label {
+            color: #5f6c7b;
+            font-size: 14px;
+            margin-bottom: 6px;
+        }
+
+        .saldo-monto {
+            font-weight: 700;
+            font-size: 26px;
+            color: #0d1b2a;
+            margin: 0;
+        }
+
+        .btn-menu {
+            border-radius: 14px;
+            padding: 12px 14px;
+            font-weight: 500;
+        }
+
+        #mensaje {
+            color: #1f3d7a;
+        }
+
+        .btn-primary {
+            background-color: #1f3d7a;
+            border: none;
+            border-radius: 14px;
+            padding: 12px 10px;
+            font-weight: 500;
+        }
+
+        .btn-primary:hover {
+            background-color: #162d5e;
+        }
