@@ -14,11 +14,92 @@
 
     <style>
         body {
-            background-color: #ecdde8;
+            background-color: #f4f6f9;
+            min-height: 100vh;
+            font-family: "Segoe UI", sans-serif;
         }
 
-        .login-box {
+        /* Contenedor tipo wallet */
+        .wallet-card {
+            background: #ffffff;
             border-radius: 24px;
+            padding: 32px;
+            max-width: 700px;
+            width: 100%;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        /* Títulos */
+        .wallet-title {
+            font-weight: 600;
+            color: #0d1b2a;
+        }
+
+        /* Subtítulos */
+        .section-title {
+            font-weight: 500;
+            color: #1f3d7a;
+        }
+
+        /* Botones principales */
+        .btn-primary {
+            background-color: #1f3d7a;
+            border: none;
+            border-radius: 12px;
+        }
+
+        .btn-primary:hover {
+            background-color: #162d5e;
+        }
+
+        /* Botón secundario */
+        .btn-secondary {
+            border-radius: 12px;
+        }
+
+        /* Lista de movimientos */
+        .list-group-item {
+            border-radius: 12px;
+            margin-bottom: 8px;
+        }
+
+        /* Select */
+        .form-select {
+            border-radius: 12px;
+        }
+
+        /* Alertas */
+        .alert {
+            border-radius: 12px;
+        }
+
+        .acciones-transacciones {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-top: 20px;
+
+            max-width: 600px;
+            /* mismo ancho que el filtro */
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .btn-wallet {
+            background-color: #1f3d7a;
+            color: #fff;
+            border: none;
+
+            padding: 12px 0;
+            font-size: 14px;
+            font-weight: 500;
+
+            border-radius: 10px;
+         
+        }
+
+        .btn-wallet:hover {
+            background-color: #162d5e;
         }
     </style>
 
@@ -80,23 +161,20 @@
 
 
         <!-- BOTONES (DEPOSITAR / TRANSFERIR) -->
-        <div class="row g-2 mt-3 justify-content-center">
-            <div class="col-12 col-sm-3 d-grid">
-                <button type="button" class="btn btn-primary" id="btnAbrirDeposito">
-                    Depósito
-                </button>
-            </div>
-            <div class="col-12 col-sm-3 d-grid">
-                <button type="button" class="btn btn-primary" id="btnAbrirTransferencia">
-                    Transferencia recibida
-                </button>
-            </div>
-            <div class="col-12 col-sm-3 d-grid">
-                <button type="button" class="btn btn-primary" id="btnAbrirCompra">
-                    Compra
-                </button>
-            </div>
+        <div class="acciones-transacciones">
+            <button type="button" class="btn btn-wallet" id="btnAbrirDeposito">
+                Depósito
+            </button>
+
+            <button type="button" class="btn btn-wallet" id="btnAbrirTransferencia">
+                Transferencia
+            </button>
+
+            <button type="button" class="btn btn-wallet" id="btnAbrirCompra">
+                Compra
+            </button>
         </div>
+
 
 
 
@@ -171,40 +249,40 @@
     </div>
 
 
-<!-- MODAL DE COMPRA -->
-<div class="modal fade" id="modalCompra" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
+    <!-- MODAL DE COMPRA -->
+    <div class="modal fade" id="modalCompra" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
 
-            <div class="modal-header">
-                <h5 class="modal-title">Registrar compra</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                <div class="modal-header">
+                    <h5 class="modal-title">Registrar compra</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+
+                <div class="modal-body">
+                    <label class="form-label">Descripción</label>
+                    <input type="text" class="form-control" id="detalleCompra" placeholder="Ej: Supermercado">
+
+                    <label class="form-label mt-3">Ingrese monto</label>
+                    <input type="number" class="form-control" id="montoCompra" min="1" placeholder="Ej: 12000">
+
+                    <div id="errorCompra" class="text-danger mt-2"></div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" id="btnConfirmarCompra">Aceptar</button>
+                </div>
+
             </div>
-
-            <div class="modal-body">
-                <label class="form-label">Descripción</label>
-                <input type="text" class="form-control" id="detalleCompra" placeholder="Ej: Supermercado">
-
-                <label class="form-label mt-3">Ingrese monto</label>
-                <input type="number" class="form-control" id="montoCompra" min="1" placeholder="Ej: 12000">
-
-                <div id="errorCompra" class="text-danger mt-2"></div>
-            </div>
-
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-primary" id="btnConfirmarCompra">Aceptar</button>
-            </div>
-
         </div>
     </div>
-</div>
 
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <script src="UltimosMovimientos.js"></script>
+    <script src="transactions.js"></script>
 
 
 
