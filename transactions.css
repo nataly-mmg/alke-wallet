@@ -1,0 +1,88 @@
+        body {
+            background-color: #f4f6f9;
+            min-height: 100vh;
+            font-family: "Segoe UI", sans-serif;
+        }
+
+        /* Contenedor tipo wallet */
+        .wallet-card {
+            background: #ffffff;
+            border-radius: 24px;
+            padding: 32px;
+            max-width: 700px;
+            width: 100%;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        /* Títulos */
+        .wallet-title {
+            font-weight: 600;
+            color: #0d1b2a;
+        }
+
+        /* Subtítulos */
+        .section-title {
+            font-weight: 500;
+            color: #1f3d7a;
+        }
+
+        /* Botones principales */
+        .btn-primary {
+            background-color: #1f3d7a;
+            border: none;
+            border-radius: 12px;
+        }
+
+        .btn-primary:hover {
+            background-color: #162d5e;
+        }
+
+        /* Botón secundario */
+        .btn-secondary {
+            border-radius: 12px;
+        }
+
+        /* Lista de movimientos */
+        .list-group-item {
+            border-radius: 12px;
+            margin-bottom: 8px;
+        }
+
+        /* Select */
+        .form-select {
+            border-radius: 12px;
+        }
+
+        /* Alertas */
+        .alert {
+            border-radius: 12px;
+        }
+
+        .acciones-transacciones {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-top: 20px;
+
+            max-width: 600px;
+            /* mismo ancho que el filtro */
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .btn-wallet {
+            background-color: #1f3d7a;
+            color: #fff;
+            border: none;
+
+            padding: 12px 0;
+            font-size: 14px;
+            font-weight: 500;
+
+            border-radius: 10px;
+
+        }
+
+        .btn-wallet:hover {
+            background-color: #162d5e;
+        }

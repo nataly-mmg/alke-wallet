@@ -20,19 +20,19 @@ function redirigir(texto, pagina) {
 // EVENTOS
 if (btnDepositar) {
     btnDepositar.addEventListener("click", () => {
-      redirigir("Depósito", "Depositar.html");
+      redirigir("Depósito", "deposit.html");
     });
   }
 
   if (btnEnviar) {
     btnEnviar.addEventListener("click", () => {
-      redirigir("Enviar dinero", "EnviarDinero.html");
+      redirigir("Enviar dinero", "sendmoney.html");
     });
   }
 
   if (btnMovimientos) {
     btnMovimientos.addEventListener("click", () => {
-      redirigir("Últimos movimientos", "UltimosMovimientos.html");
+      redirigir("Últimos movimientos", "transactions.html");
     });
   }
   

@@ -12,15 +12,7 @@
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 
-    <style>
-        body {
-            background-color: #ecdde8;
-        }
-
-        .login-box {
-            border-radius: 24px;
-        }
-    </style>
+    <link rel="stylesheet" href="transactions.css">
 
 </head>
 
@@ -80,23 +72,20 @@
 
 
         <!-- BOTONES (DEPOSITAR / TRANSFERIR) -->
-        <div class="row g-2 mt-3 justify-content-center">
-            <div class="col-12 col-sm-3 d-grid">
-                <button type="button" class="btn btn-primary" id="btnAbrirDeposito">
-                    Depósito
-                </button>
-            </div>
-            <div class="col-12 col-sm-3 d-grid">
-                <button type="button" class="btn btn-primary" id="btnAbrirTransferencia">
-                    Transferencia recibida
-                </button>
-            </div>
-            <div class="col-12 col-sm-3 d-grid">
-                <button type="button" class="btn btn-primary" id="btnAbrirCompra">
-                    Compra
-                </button>
-            </div>
+        <div class="acciones-transacciones">
+            <button type="button" class="btn btn-wallet" id="btnAbrirDeposito">
+                Depósito
+            </button>
+
+            <button type="button" class="btn btn-wallet" id="btnAbrirTransferencia">
+                Transferencia
+            </button>
+
+            <button type="button" class="btn btn-wallet" id="btnAbrirCompra">
+                Compra
+            </button>
         </div>
+
 
 
 
@@ -171,40 +160,40 @@
     </div>
 
 
-<!-- MODAL DE COMPRA -->
-<div class="modal fade" id="modalCompra" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
+    <!-- MODAL DE COMPRA -->
+    <div class="modal fade" id="modalCompra" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
 
-            <div class="modal-header">
-                <h5 class="modal-title">Registrar compra</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                <div class="modal-header">
+                    <h5 class="modal-title">Registrar compra</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+
+                <div class="modal-body">
+                    <label class="form-label">Descripción</label>
+                    <input type="text" class="form-control" id="detalleCompra" placeholder="Ej: Supermercado">
+
+                    <label class="form-label mt-3">Ingrese monto</label>
+                    <input type="number" class="form-control" id="montoCompra" min="1" placeholder="Ej: 12000">
+
+                    <div id="errorCompra" class="text-danger mt-2"></div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" id="btnConfirmarCompra">Aceptar</button>
+                </div>
+
             </div>
-
-            <div class="modal-body">
-                <label class="form-label">Descripción</label>
-                <input type="text" class="form-control" id="detalleCompra" placeholder="Ej: Supermercado">
-
-                <label class="form-label mt-3">Ingrese monto</label>
-                <input type="number" class="form-control" id="montoCompra" min="1" placeholder="Ej: 12000">
-
-                <div id="errorCompra" class="text-danger mt-2"></div>
-            </div>
-
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-primary" id="btnConfirmarCompra">Aceptar</button>
-            </div>
-
         </div>
     </div>
-</div>
 
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <script src="UltimosMovimientos.js"></script>
+    <script src="transactions.js"></script>
 
 
 

@@ -1,0 +1,62 @@
+     body {
+            background-color: #f4f6f9;
+            min-height: 100vh;
+        }
+
+        .wallet-card {
+            background: #ffffff;
+            border-radius: 24px;
+            padding: 40px;
+            max-width: 600px;
+            width: 100%;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        .wallet-icon {
+            font-size: 36px;
+            color: #1f3d7a;
+            text-align: center;
+            margin-bottom: 12px;
+        }
+
+        .wallet-title {
+            font-weight: 600;
+            color: #0d1b2a;
+        }
+
+        .actions {
+            display: flex;
+            justify-content: center;
+
+        }
+
+        /* Botones principales */
+        .btn-primary {
+            background-color: #1f3d7a;
+            border-color: #1f3d7a;
+            font-weight: 500;
+        }
+
+        .btn-primary:hover,
+        .btn-primary:focus {
+            background-color: #162d5e;
+            border-color: #162d5e;
+        }
+
+        /* Botón secundario (volver al menú) */
+        .btn-secondary {
+            background-color: #6c757d;
+            border-color: #6c757d;
+        }
+
+        .btn-secondary:hover {
+            background-color: #5c636a;
+            border-color: #5c636a;
+        }
+
+        /* Botón deshabilitado */
+        .btn-primary:disabled {
+            background-color: #9fb0d1;
+            border-color: #9fb0d1;
+            cursor: not-allowed;
+        }
